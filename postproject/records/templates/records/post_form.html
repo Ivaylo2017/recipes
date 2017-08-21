@@ -1,0 +1,5 @@
+<form action="" method="post" enctype="multipart/form-data"> //enctype is used to enable images upload
+	{% csrf_token %}   //Create a cross-site forgery request protection token id
+	{{form.as_p}}         //Tells django to create a form
+	<input type="submit" value="Save"/>
+</form>

@@ -1,7 +1,8 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
-class Post(models.Model):                   #With this class we deefine the schema and each attribute 
+class Post(models.Model):                   #With this class we define the schema and each attribute 
 
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 	title = models.CharField(max_length=120)
@@ -13,8 +14,8 @@ class Post(models.Model):                   #With this class we deefine the sche
 	published = models.DateField(auto_now=False, auto_now_add=True)
 
 
-class Meta:
-	ordering = ['-published']
+	class Meta:
+		ordering = ['-published']
 
 	def __str__(self):                       # Python 3 uses this function to convert django object to a string
 
@@ -22,9 +23,11 @@ class Meta:
 
 	def __unicode__(self):
 		
-		 return str(self.title)
+		return str(self.title)
 
-		
+	def get_absolute_url(self):
+
+		return reverse('detail_post', kwargs={'pk': self.pk})
 		
 
 		
