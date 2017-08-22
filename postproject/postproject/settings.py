@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_f@xg9e$nbv0h_t5p)^nt8ga^&x*eyqxh&@^%o8^8j*14*m+)m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -118,14 +118,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
-STATICFILES_DIRS = [
+if DEBUG is True:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = '/static/'
+    STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
-]
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    ]
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     STATIC_URL = '/static/'
-
-    STATIC_ROOT = '/var/www/venv/'
+              
+    STATIC_ROOT = '/var/www/venv/recipes/postproject/static/'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, '/var/www/venv/recipses/postproject/staticfiles/')
+    ]
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, '/var/www/venv/recipes/postproject/media/')
